@@ -1,25 +1,30 @@
 import type { Metadata } from "next";
 
-import { Geist, Geist_Mono } from "next/font/google";
+import { DM_Sans, Playfair_Display, JetBrains_Mono } from "next/font/google";
 
 import "../index.css";
-import Header from "@/components/header";
 import Providers from "@/components/providers";
 import { getToken } from "@/lib/auth-server";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const dmSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "website-convex",
-  description: "website-convex",
+  title: "SignSecure - Document Signing Built for Engineers",
+  description:
+    "Enterprise document signing infrastructure. From desktop batch signing to serverless cloud APIs.",
 };
 
 export default async function RootLayout({
@@ -30,13 +35,10 @@ export default async function RootLayout({
   const token = await getToken();
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Providers initialToken={token}>
-          <div className="grid grid-rows-[auto_1fr] h-svh">
-            <Header />
-            {children}
-          </div>
-        </Providers>
+      <body
+        className={`${dmSans.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
+      >
+        <Providers initialToken={token}>{children}</Providers>
       </body>
     </html>
   );

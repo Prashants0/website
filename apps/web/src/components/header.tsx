@@ -2,11 +2,13 @@
 import Link from "next/link";
 
 import { ModeToggle } from "./mode-toggle";
+import UserMenu from "./user-menu";
 
 export default function Header() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/dashboard", label: "Dashboard" },
+    { to: "/cms", label: "CMS" },
   ] as const;
 
   return (
@@ -15,7 +17,7 @@ export default function Header() {
         <nav className="flex gap-4 text-lg">
           {links.map(({ to, label }) => {
             return (
-              <Link key={to} href={to}>
+              <Link key={to} href={to as any}>
                 {label}
               </Link>
             );
@@ -23,6 +25,7 @@ export default function Header() {
         </nav>
         <div className="flex items-center gap-2">
           <ModeToggle />
+          <UserMenu />
         </div>
       </div>
       <hr />
