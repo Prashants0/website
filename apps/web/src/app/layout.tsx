@@ -22,9 +22,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SignSecure - Document Signing Built for Engineers",
+  title: "SignSecure - Document Signing Made Simple",
   description:
-    "Enterprise document signing infrastructure. From desktop batch signing to serverless cloud APIs.",
+    "Sign, send, and manage documents with four powerful tools. From desktop batch signing to complete e-signature workflows. Start free today.",
 };
 
 export default async function RootLayout({

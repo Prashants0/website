@@ -12,10 +12,10 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Products",
     links: [
-      { label: "SignSecure Win", href: "/products/signsecure-win" },
+      { label: "SignBolt", href: "/products/signbolt" },
       { label: "SignBridge", href: "/products/signbridge" },
-      { label: "Signly API", href: "/products/signly-api" },
-      { label: "Moonlight", href: "/products/moonlight" },
+      { label: "SignLift", href: "/products/signlift" },
+      { label: "SignPad", href: "/products/signpad" },
     ],
   },
   {
@@ -31,20 +31,20 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
   {
     title: "Company",
     links: [
-      { label: "About", href: "#", external: true },
+      { label: "About", href: "/about" },
       { label: "Blog", href: "#", external: true },
       { label: "Careers", href: "#", external: true },
-      { label: "Contact", href: "#", external: true },
-      { label: "Privacy Policy", href: "#", external: true },
-      { label: "Terms of Service", href: "#", external: true },
+      { label: "Contact", href: "/contact" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
     ],
   },
 ];
 
 export function LandingFooter() {
   return (
-    <footer className="border-t-[3px] border-brand bg-gradient-to-b from-[oklch(0.18_0.01_240)] to-[oklch(0.12_0.01_240)] pt-[72px] pb-9 text-[#94A3B8]">
-      <div className="mx-auto max-w-[1240px] px-7">
+    <footer className="border-t-[3px] border-brand bg-gradient-to-b from-[oklch(0.18_0.01_240)] to-[oklch(0.12_0.01_240)] pt-12 sm:pt-[72px] pb-9 text-[#94A3B8]">
+      <div className="mx-auto max-w-[1240px] px-4 sm:px-7">
         <div className="mb-14 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="mb-5 flex items-center gap-2.5 no-underline">
@@ -54,8 +54,8 @@ export function LandingFooter() {
               </span>
             </Link>
             <p className="max-w-[300px] text-sm leading-relaxed text-[#8294AA]">
-              Enterprise document signing infrastructure. From desktop batch
-              signing to serverless cloud APIs.
+              Document signing made simple. Four powerful tools to sign, send,
+              and manage documents of any kind.
             </p>
             <div className="mt-5 flex items-center gap-2">
               <div className="size-2 rounded-full bg-success" />
@@ -76,14 +76,14 @@ export function LandingFooter() {
                     {link.external ? (
                       <a
                         href={link.href}
-                        className="text-sm text-[#8294AA] no-underline transition-colors hover:text-[#E4E7EC]"
+                        className="inline-block py-1 text-sm text-[#8294AA] no-underline transition-colors hover:text-[#E4E7EC]"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
-                        href={link.href as "/pricing" | `/products/${string}`}
-                        className="text-sm text-[#8294AA] no-underline transition-colors hover:text-[#E4E7EC]"
+                        href={link.href as any}
+                        className="inline-block py-1 text-sm text-[#8294AA] no-underline transition-colors hover:text-[#E4E7EC]"
                       >
                         {link.label}
                       </Link>
@@ -104,15 +104,15 @@ export function LandingFooter() {
           </p>
           <div className="flex gap-2">
             <a
-              href="mailto:sales@signsecure.in"
-              className="font-mono text-[11px] text-[#6B7D8F] no-underline"
+              href="mailto:hello@signsecure.in"
+              className="inline-block py-1 font-mono text-[11px] text-[#6B7D8F] no-underline"
             >
-              sales@signsecure.in
+              hello@signsecure.in
             </a>
             <span className="text-[#6B7D8F]">&middot;</span>
             <a
               href="mailto:support@signsecure.in"
-              className="font-mono text-[11px] text-[#6B7D8F] no-underline"
+              className="inline-block py-1 font-mono text-[11px] text-[#6B7D8F] no-underline"
             >
               support@signsecure.in
             </a>

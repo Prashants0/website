@@ -43,8 +43,8 @@ export default function SignInForm({ onSwitchToSignUp }: { onSwitchToSignUp: () 
   });
 
   return (
-    <div className="mx-auto w-full mt-10 max-w-md p-6">
-      <h1 className="mb-6 text-center text-3xl font-bold">Welcome Back</h1>
+    <div className="mx-auto w-full mt-6 sm:mt-10 max-w-md p-4 sm:p-6">
+      <h1 className="mb-6 text-center text-2xl sm:text-3xl font-bold">Welcome Back</h1>
 
       <form
         onSubmit={(e) => {

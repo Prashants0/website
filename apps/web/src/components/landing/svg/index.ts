@@ -25,6 +25,7 @@ export {
 
 // Homepage SVGs
 export {
+  PaperTextureSvg,
   CircuitBoardSvg,
   ArchitectureDiagramSvg,
   CryptoShieldSvg,
@@ -32,6 +33,9 @@ export {
   ServerlessSvg,
   WorkflowSvg,
   BatchProcessSvg,
+  BatchDocsSvg,
+  BrowserShieldSvg,
+  CloudSignSvg,
   CertificateSvg,
   DataFlowDivider,
   trustSvgIcons,
@@ -43,10 +47,10 @@ export {
 
 // Product hero illustrations
 export {
-  WinHeroSvg,
+  SignBoltHeroSvg,
   BridgeHeroSvg,
-  ApiHeroSvg,
-  MoonlightHeroSvg,
+  SignLiftHeroSvg,
+  SignPadHeroSvg,
   productHeroSvgs,
 } from "./product-hero-svgs";
 
@@ -55,3 +59,15 @@ export {
   ProductArchSvg,
   useCaseIcons,
 } from "./product-page-svgs";
+
+// SignBolt hero canvas
+export { SignBoltHeroCanvas } from "./signbolt-hero-canvas";
+
+// SignBridge hero canvas
+export { SignBridgeHeroCanvas } from "./signbridge-hero-canvas";
+
+// SignLift hero canvas
+export { SignLiftHeroCanvas } from "./signlift-hero-canvas";
+
+// SignPad hero canvas
+export { SignPadHeroCanvas } from "./signpad-hero-canvas";

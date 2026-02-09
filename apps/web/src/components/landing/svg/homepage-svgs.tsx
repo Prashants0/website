@@ -7,7 +7,47 @@ import type React from "react";
    Extracted from apps/web/src/app/(marketing)/page.tsx
    ═══════════════════════════════════════════════════════════ */
 
-/** Animated circuit-board background pattern */
+/** Warm paper texture background pattern (replaces CircuitBoardSvg) */
+export function PaperTextureSvg({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 800 600"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Horizontal ruled lines */}
+      <line x1="0" y1="80" x2="800" y2="80" stroke="currentColor" strokeWidth="0.5" opacity="0.14" />
+      <line x1="0" y1="160" x2="800" y2="160" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
+      <line x1="0" y1="240" x2="800" y2="240" stroke="currentColor" strokeWidth="0.5" opacity="0.14" />
+      <line x1="0" y1="320" x2="800" y2="320" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
+      <line x1="0" y1="400" x2="800" y2="400" stroke="currentColor" strokeWidth="0.5" opacity="0.14" />
+      <line x1="0" y1="480" x2="800" y2="480" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
+      <line x1="0" y1="560" x2="800" y2="560" stroke="currentColor" strokeWidth="0.5" opacity="0.14" />
+      {/* Scattered warm dots (like paper fibers) */}
+      {[
+        [120, 90], [340, 150], [560, 110], [700, 200],
+        [80, 280], [250, 340], [480, 300], [650, 380],
+        [160, 450], [400, 500], [600, 470], [720, 540],
+        [50, 170], [300, 60], [500, 210], [380, 420],
+      ].map(([cx, cy], i) => (
+        <circle
+          key={i}
+          cx={cx}
+          cy={cy}
+          r={1 + (i % 3) * 0.5}
+          fill="var(--color-brand)"
+          opacity={0.08 + (i % 4) * 0.04}
+        />
+      ))}
+      {/* Soft curved lines suggesting folded paper */}
+      <path d="M0 200 Q200 180 400 200 Q600 220 800 200" stroke="currentColor" strokeWidth="0.5" opacity="0.1" fill="none" />
+      <path d="M0 400 Q200 380 400 400 Q600 420 800 400" stroke="currentColor" strokeWidth="0.5" opacity="0.1" fill="none" />
+    </svg>
+  );
+}
+
+/** Animated circuit-board background pattern (kept for backward compatibility) */
 export function CircuitBoardSvg({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -95,7 +135,7 @@ export function ArchitectureDiagramSvg({ className = "" }: { className?: string 
       </g>
       <text x="260" y="270" textAnchor="middle" fill="var(--color-brand)" fontSize="10" fontFamily="var(--font-mono)" fontWeight="600" letterSpacing="0.1em">SIGNSECURE</text>
 
-      {/* Node: Desktop (top-left) - SignSecure Win */}
+      {/* Node: Desktop (top-left) - SignBolt */}
       <g>
         <line x1="160" y1="115" x2="225" y2="175" stroke="url(#flowLine)" strokeWidth="1.5" strokeDasharray="4 3">
           <animate attributeName="stroke-dashoffset" from="20" to="0" dur="3s" repeatCount="indefinite" />
@@ -125,7 +165,7 @@ export function ArchitectureDiagramSvg({ className = "" }: { className?: string 
         <text x="400" y="125" textAnchor="middle" fill="var(--color-violet)" fontSize="7.5" fontFamily="var(--font-mono)" opacity="0.7">0ms key exposure</text>
       </g>
 
-      {/* Node: Cloud (bottom-right) - Signly API */}
+      {/* Node: Cloud (bottom-right) - SignLift */}
       <g>
         <line x1="360" y1="310" x2="295" y2="250" stroke="var(--color-cyan)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5">
           <animate attributeName="stroke-dashoffset" from="20" to="0" dur="4s" repeatCount="indefinite" />
@@ -139,7 +179,7 @@ export function ArchitectureDiagramSvg({ className = "" }: { className?: string 
         <text x="400" y="355" textAnchor="middle" fill="var(--color-cyan)" fontSize="7.5" fontFamily="var(--font-mono)" opacity="0.7">99.99% uptime</text>
       </g>
 
-      {/* Node: Platform (bottom-left) - Moonlight */}
+      {/* Node: Platform (bottom-left) - SignPad */}
       <g>
         <line x1="160" y1="310" x2="225" y2="250" stroke="var(--color-amber)" strokeWidth="1.5" strokeDasharray="4 3" opacity="0.5">
           <animate attributeName="stroke-dashoffset" from="20" to="0" dur="3.8s" repeatCount="indefinite" />
@@ -255,6 +295,78 @@ export function BatchProcessSvg({ className = "" }: { className?: string }) {
   );
 }
 
+/** Stacked documents with signature marks — batch docs illustration */
+export function BatchDocsSvg({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Stack of 3 documents */}
+      <rect x="18" y="6" width="28" height="36" rx="3" stroke="var(--color-brand)" strokeWidth="1" fill="none" opacity="0.2" />
+      <rect x="14" y="10" width="28" height="36" rx="3" stroke="var(--color-brand)" strokeWidth="1" fill="none" opacity="0.35" />
+      <rect x="10" y="14" width="28" height="36" rx="3" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      {/* Text lines */}
+      <line x1="16" y1="22" x2="32" y2="22" stroke="var(--color-brand)" strokeWidth="1" opacity="0.3" />
+      <line x1="16" y1="28" x2="28" y2="28" stroke="var(--color-brand)" strokeWidth="1" opacity="0.2" />
+      <line x1="16" y1="34" x2="30" y2="34" stroke="var(--color-brand)" strokeWidth="1" opacity="0.2" />
+      {/* Signature line */}
+      <path d="M16 42 Q20 38 24 42 Q28 46 32 42" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
+      {/* Checkmark badge */}
+      <circle cx="46" cy="16" r="8" fill="var(--color-brand)" fillOpacity="0.12" stroke="var(--color-brand)" strokeWidth="1" />
+      <path d="M42 16 L45 19 L50 13" stroke="var(--color-brand)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  );
+}
+
+/** Browser window with shield — browser certificate signing illustration */
+export function BrowserShieldSvg({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Browser window */}
+      <rect x="4" y="8" width="44" height="36" rx="4" stroke="var(--color-violet)" strokeWidth="1.5" fill="var(--color-violet)" fillOpacity="0.04" />
+      {/* Browser toolbar */}
+      <line x1="4" y1="18" x2="48" y2="18" stroke="var(--color-violet)" strokeWidth="1" opacity="0.3" />
+      <circle cx="10" cy="13" r="1.5" fill="var(--color-violet)" opacity="0.3" />
+      <circle cx="16" cy="13" r="1.5" fill="var(--color-violet)" opacity="0.3" />
+      <circle cx="22" cy="13" r="1.5" fill="var(--color-violet)" opacity="0.3" />
+      {/* URL bar */}
+      <rect x="28" y="11" width="16" height="4" rx="1" stroke="var(--color-violet)" strokeWidth="0.5" fill="none" opacity="0.2" />
+      {/* Document content lines */}
+      <line x1="10" y1="24" x2="32" y2="24" stroke="var(--color-violet)" strokeWidth="0.8" opacity="0.2" />
+      <line x1="10" y1="30" x2="28" y2="30" stroke="var(--color-violet)" strokeWidth="0.8" opacity="0.15" />
+      <line x1="10" y1="36" x2="30" y2="36" stroke="var(--color-violet)" strokeWidth="0.8" opacity="0.15" />
+      {/* Shield overlay */}
+      <g transform="translate(46, 34)">
+        <path d="M0 -14 L12 -8 L12 0 Q12 10 0 14 Q-12 10 -12 0 L-12 -8 Z" stroke="var(--color-violet)" strokeWidth="1.5" fill="var(--color-violet)" fillOpacity="0.08" />
+        <path d="M-4 0 L-1 3 L5 -3" stroke="var(--color-violet)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      </g>
+    </svg>
+  );
+}
+
+/** Cloud with document — cloud signing API illustration */
+export function CloudSignSvg({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      {/* Cloud */}
+      <path d="M14 36 Q6 36 6 28 Q6 20 14 18 Q18 8 28 8 Q38 8 42 16 Q52 14 54 22 Q56 30 48 34 L48 36 Z" stroke="var(--color-cyan)" strokeWidth="1.5" fill="var(--color-cyan)" fillOpacity="0.06" />
+      {/* Document inside cloud */}
+      <rect x="20" y="16" width="16" height="20" rx="2" stroke="var(--color-cyan)" strokeWidth="1" fill="var(--color-cyan)" fillOpacity="0.08" />
+      <line x1="24" y1="22" x2="32" y2="22" stroke="var(--color-cyan)" strokeWidth="0.8" opacity="0.3" />
+      <line x1="24" y1="26" x2="30" y2="26" stroke="var(--color-cyan)" strokeWidth="0.8" opacity="0.2" />
+      {/* Signature mark on doc */}
+      <path d="M24 30 Q26 28 28 30 Q30 32 32 30" stroke="var(--color-cyan)" strokeWidth="1" fill="none" />
+      {/* Arrow showing upload/download */}
+      <g transform="translate(32, 48)">
+        <line x1="0" y1="-4" x2="0" y2="8" stroke="var(--color-cyan)" strokeWidth="1" strokeDasharray="2 2" opacity="0.4" />
+        <path d="M-3 4 L0 8 L3 4" stroke="var(--color-cyan)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" fill="none" opacity="0.5" />
+      </g>
+      {/* Status dots */}
+      <circle cx="22" cy="54" r="1.5" fill="var(--color-cyan)" opacity="0.3" />
+      <circle cx="28" cy="54" r="1.5" fill="var(--color-cyan)" opacity="0.5" />
+      <circle cx="34" cy="54" r="1.5" fill="var(--color-cyan)" opacity="0.3" />
+    </svg>
+  );
+}
+
 /** Certificate SVG */
 export function CertificateSvg({ className = "" }: { className?: string }) {
   return (
@@ -272,12 +384,12 @@ export function CertificateSvg({ className = "" }: { className?: string }) {
 export function DataFlowDivider({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 1200 24" fill="none" preserveAspectRatio="none">
-      <line x1="0" y1="12" x2="1200" y2="12" stroke="currentColor" strokeWidth="0.5" opacity="0.1" />
-      <circle r="3" fill="var(--color-brand)" opacity="0.5">
+      <line x1="0" y1="12" x2="1200" y2="12" stroke="currentColor" strokeWidth="0.8" opacity="0.25" />
+      <circle r="3" fill="var(--color-brand)" opacity="0.7">
         <animate attributeName="cx" from="0" to="1200" dur="8s" repeatCount="indefinite" />
         <animate attributeName="cy" values="12" dur="8s" repeatCount="indefinite" />
       </circle>
-      <circle r="2" fill="var(--color-cyan)" opacity="0.4">
+      <circle r="2" fill="var(--color-cyan)" opacity="0.65">
         <animate attributeName="cx" from="1200" to="0" dur="10s" repeatCount="indefinite" />
         <animate attributeName="cy" values="12" dur="10s" repeatCount="indefinite" />
       </circle>
@@ -290,6 +402,54 @@ export function DataFlowDivider({ className = "" }: { className?: string }) {
    ═══════════════════════════════════════════════════════════ */
 
 export const trustSvgIcons: Record<string, React.ReactNode> = {
+  /* ── New user-friendly labels (used by trustPoints) ── */
+  "Legally Valid": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <rect x="8" y="4" width="24" height="32" rx="3" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      <line x1="12" y1="12" x2="28" y2="12" stroke="var(--color-brand)" strokeWidth="1" opacity="0.3" />
+      <line x1="12" y1="17" x2="24" y2="17" stroke="var(--color-brand)" strokeWidth="1" opacity="0.2" />
+      <path d="M14 26 Q18 22 22 26 Q26 30 28 26" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
+    </svg>
+  ),
+  "Tamper-Proof": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <path d="M20 4 L34 10 L34 20 Q34 32 20 36 Q6 32 6 20 L6 10 Z" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      <path d="M14 20 L18 24 L26 16" stroke="var(--color-brand)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  ),
+  "Long-Lasting": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <circle cx="20" cy="20" r="14" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      <path d="M20 10 L20 20 L28 24" stroke="var(--color-brand)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <path d="M12 28 Q16 32 20 34 Q24 32 28 28" stroke="var(--color-brand)" strokeWidth="1" opacity="0.3" fill="none" />
+    </svg>
+  ),
+  "Verified Identity": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <circle cx="20" cy="14" r="6" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.08" />
+      <path d="M10 32 Q10 24 20 24 Q30 24 30 32" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
+      <path d="M24 10 L26 12 L30 8" stroke="var(--color-brand)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  ),
+  "Encrypted": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <rect x="6" y="16" width="28" height="18" rx="3" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      <path d="M14 16 L14 10 Q14 4 20 4 Q26 4 26 10 L26 16" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
+      <circle cx="20" cy="26" r="3" fill="var(--color-brand)" opacity="0.4" />
+      <line x1="20" y1="29" x2="20" y2="32" stroke="var(--color-brand)" strokeWidth="1.5" />
+    </svg>
+  ),
+  "Standards-Based": (
+    <svg viewBox="0 0 40 40" fill="none" className="size-10">
+      <path d="M8 8 L32 8 L32 36 L8 36 Z" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />
+      <line x1="12" y1="14" x2="28" y2="14" stroke="var(--color-brand)" strokeWidth="1" opacity="0.3" />
+      <line x1="12" y1="19" x2="26" y2="19" stroke="var(--color-brand)" strokeWidth="1" opacity="0.2" />
+      <line x1="12" y1="24" x2="24" y2="24" stroke="var(--color-brand)" strokeWidth="1" opacity="0.2" />
+      <path d="M22 28 L26 32 L30 26" stroke="var(--color-brand)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    </svg>
+  ),
+
+  /* ── Old technical labels (kept for /1 page and backward compat) ── */
   "X.509": (
     <svg viewBox="0 0 40 40" fill="none" className="size-10">
       <rect x="4" y="4" width="32" height="32" rx="6" stroke="var(--color-brand)" strokeWidth="1.5" fill="var(--color-brand)" fillOpacity="0.06" />

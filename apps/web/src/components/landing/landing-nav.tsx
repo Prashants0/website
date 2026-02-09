@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 import { Moon, Sun, Menu, X, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -20,20 +20,12 @@ export function LandingNav() {
   const [productsOpen, setProductsOpen] = useState(false);
   const dark = theme === "dark";
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
-  const scrollTo = useCallback(
-    (id: string) => {
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      setMobileMenu(false);
-    },
-    []
-  );
 
   return (
     <>
       <nav className="fixed top-0 right-0 left-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl transition-colors">
-        <div className="mx-auto flex h-[84px] max-w-[1240px] items-center justify-between px-7">
+        <div className="mx-auto flex h-[72px] max-w-[1240px] items-center justify-between px-4 sm:h-[84px] sm:px-7">
           {/* Logo */}
           <Link
             href="/"
@@ -55,9 +47,6 @@ export function LandingNav() {
             >
               <button
                 onClick={() => {
-                  if (isHome) {
-                    scrollTo("products");
-                  }
                   setProductsOpen(!productsOpen);
                 }}
                 className="flex items-center gap-1 bg-transparent border-none cursor-pointer text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -106,23 +95,7 @@ export function LandingNav() {
               )}
             </div>
 
-            {/* Scroll-to links (only meaningful on home) */}
-            {isHome ? (
-              <>
-                <button
-                  onClick={() => scrollTo("how-it-works")}
-                  className="bg-transparent border-none cursor-pointer text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  How It Works
-                </button>
-                <button
-                  onClick={() => scrollTo("compare")}
-                  className="bg-transparent border-none cursor-pointer text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  Compare
-                </button>
-              </>
-            ) : null}
+
 
             {/* Pricing link - always route-based */}
             <Link
@@ -134,15 +107,27 @@ export function LandingNav() {
               Pricing
             </Link>
 
-            {/* Trust - scroll only on home */}
-            {isHome && (
-              <button
-                onClick={() => scrollTo("trust")}
-                className="bg-transparent border-none cursor-pointer text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Trust
-              </button>
-            )}
+            {/* About link - always route-based */}
+            <Link
+              href={"/about" as any}
+              className={`text-sm font-medium no-underline transition-colors hover:text-foreground ${
+                pathname === "/about" ? "text-brand" : "text-muted-foreground"
+              }`}
+            >
+              About
+            </Link>
+
+            {/* Contact link - always route-based */}
+            <Link
+              href={"/contact" as any}
+              className={`text-sm font-medium no-underline transition-colors hover:text-foreground ${
+                pathname === "/contact" ? "text-brand" : "text-muted-foreground"
+              }`}
+            >
+              Contact
+            </Link>
+
+
           </div>
 
           {/* Desktop actions */}
@@ -157,10 +142,10 @@ export function LandingNav() {
               <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
             <Link
-              href="https://signsecure.in"
+              href="https://app.signsecure.in"
               className="rounded-lg bg-brand px-6 py-2.5 text-sm font-semibold text-brand-foreground shadow-[0_4px_16px_var(--color-brand-glow)] transition-all hover:opacity-90 no-underline"
             >
-              Deploy Now
+              Get Started Free
             </Link>
           </div>
 
@@ -179,12 +164,13 @@ export function LandingNav() {
 
       {/* Mobile menu overlay */}
       {mobileMenu && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 bg-background/98 backdrop-blur-xl">
+        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-3 bg-background/98 backdrop-blur-xl">
           <button
             onClick={() => setMobileMenu(false)}
-            className="absolute top-6 right-6 bg-transparent border-none text-2xl cursor-pointer text-foreground"
+            className="absolute top-5 right-5 flex size-11 items-center justify-center rounded-lg bg-transparent border-none cursor-pointer text-foreground transition-colors hover:bg-muted"
+            aria-label="Close menu"
           >
-            <X className="size-7" />
+            <X className="size-6" />
           </button>
 
           {/* Products section */}
@@ -192,13 +178,13 @@ export function LandingNav() {
             <div className="mb-3 font-mono text-[10px] text-muted-foreground tracking-widest">
               PRODUCTS
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {products.map((p) => (
                 <Link
                   key={p.slug}
                   href={`/products/${p.slug}`}
                   onClick={() => setMobileMenu(false)}
-                  className={`font-display text-lg font-bold no-underline ${accentColorMap[p.accent]}`}
+                  className={`rounded-lg px-6 py-2.5 font-display text-lg font-bold no-underline transition-colors hover:bg-muted ${accentColorMap[p.accent]}`}
                 >
                   {p.name}
                 </Link>
@@ -209,39 +195,40 @@ export function LandingNav() {
           <div className="h-px w-16 bg-border" />
 
           {/* Navigation links */}
-          {isHome && (
-            <>
-              <button
-                onClick={() => scrollTo("how-it-works")}
-                className="bg-transparent border-none font-display text-2xl font-bold cursor-pointer text-foreground"
-              >
-                How It Works
-              </button>
-              <button
-                onClick={() => scrollTo("compare")}
-                className="bg-transparent border-none font-display text-2xl font-bold cursor-pointer text-foreground"
-              >
-                Compare
-              </button>
-            </>
-          )}
-
           <Link
             href="/pricing"
             onClick={() => setMobileMenu(false)}
-            className="font-display text-2xl font-bold no-underline text-foreground"
+            className="rounded-lg px-6 py-3 font-display text-2xl font-bold no-underline text-foreground transition-colors hover:bg-muted"
           >
             Pricing
           </Link>
 
-          {isHome && (
-            <button
-              onClick={() => scrollTo("trust")}
-              className="bg-transparent border-none font-display text-2xl font-bold cursor-pointer text-foreground"
+          <Link
+            href={"/about" as any}
+            onClick={() => setMobileMenu(false)}
+            className="rounded-lg px-6 py-3 font-display text-2xl font-bold no-underline text-foreground transition-colors hover:bg-muted"
+          >
+            About
+          </Link>
+
+          <Link
+            href={"/contact" as any}
+            onClick={() => setMobileMenu(false)}
+            className="rounded-lg px-6 py-3 font-display text-2xl font-bold no-underline text-foreground transition-colors hover:bg-muted"
+          >
+            Contact
+          </Link>
+
+          {/* Mobile CTA */}
+          <div className="mt-4">
+            <Link
+              href="https://app.signsecure.in"
+              onClick={() => setMobileMenu(false)}
+              className="rounded-lg bg-brand px-6 py-3 text-sm font-semibold text-brand-foreground shadow-[0_4px_16px_var(--color-brand-glow)] no-underline transition-all hover:opacity-90"
             >
-              Trust
-            </button>
-          )}
+              Get Started Free
+            </Link>
+          </div>
         </div>
       )}
     </>

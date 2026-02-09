@@ -8,10 +8,10 @@ export default function BlogIndexPage() {
   const posts = useQuery(api.cmsBlog.listPublished);
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-14">
-      <div className="mb-10">
+    <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
+      <div className="mb-8 sm:mb-10">
         <div className="font-mono text-xs tracking-widest text-brand">{"// blog"}</div>
-        <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight">Blog</h1>
+        <h1 className="mt-3 font-display text-2xl font-extrabold tracking-tight sm:text-4xl">Blog</h1>
         <p className="mt-3 text-muted-foreground">
           Product updates, deep dives, and practical guides.
         </p>

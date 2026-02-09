@@ -17,7 +17,7 @@ export default function UseCasePage({
 
   if (useCase === undefined) {
     return (
-      <main className="mx-auto max-w-4xl px-6 py-14">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="text-sm text-muted-foreground">Loading...</div>
       </main>
     );
@@ -25,17 +25,17 @@ export default function UseCasePage({
 
   if (!useCase) {
     return (
-      <main className="mx-auto max-w-4xl px-6 py-14">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
         <div className="text-sm text-muted-foreground">Use case not found.</div>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-6 py-14">
-      <header className="mb-10">
+    <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
+      <header className="mb-8 sm:mb-10">
         <div className="font-mono text-xs tracking-widest text-brand">{"// use_case"}</div>
-        <h1 className="mt-3 font-display text-4xl font-extrabold tracking-tight">{useCase.title}</h1>
+        <h1 className="mt-3 font-display text-2xl font-extrabold tracking-tight sm:text-4xl">{useCase.title}</h1>
         {useCase.summary ? (
           <p className="mt-3 text-lg text-muted-foreground">{useCase.summary}</p>
         ) : null}

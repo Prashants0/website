@@ -42,7 +42,7 @@ import {
 } from "@/components/landing/data";
 import { useReveal, useRevealStyle } from "@/components/landing/hooks";
 import { ProductIcon } from "@/components/landing/svg";
-import { MoonlightHeroSvg } from "@/components/landing/svg/product-hero-svgs";
+import { SignPadHeroSvg } from "@/components/landing/svg/product-hero-svgs";
 
 /* ═══════════════════════════════════════════════════════════
    /1 — ALL PRODUCTS, MOONLIGHT-FOCUSED SHOWCASE
@@ -50,8 +50,8 @@ import { MoonlightHeroSvg } from "@/components/landing/svg/product-hero-svgs";
    SignNow (comparison), Dropbox Sign (clean hero), BoldSign (pricing)
    ═══════════════════════════════════════════════════════════ */
 
-const moonlight = products.find((p) => p.slug === "moonlight")!;
-const otherProducts = products.filter((p) => p.slug !== "moonlight");
+const moonlight = products.find((p) => p.slug === "signpad")!;
+const otherProducts = products.filter((p) => p.slug !== "signpad");
 
 /* ── Signature methods data ── */
 const sigMethods = [
@@ -101,15 +101,15 @@ const complianceBadges = [
 function HeroSection() {
   const { ref, vis } = useReveal(0.05);
   return (
-    <section ref={ref} className="relative overflow-hidden">
+    <section ref={ref} className="relative flex min-h-screen items-center overflow-hidden">
       {/* Ambient background glow — animated pulse */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-1/2 top-0 -translate-x-1/2 h-[600px] w-[900px] rounded-full bg-brand/5 blur-[120px] animate-glow-pulse" />
         <div className="absolute right-0 top-1/3 h-[300px] w-[400px] rounded-full bg-brand/4 blur-[100px] animate-glow-pulse [animation-delay:1.5s]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 pt-28 pb-20 lg:pt-36 lg:pb-28">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
+      <div className="relative mx-auto max-w-7xl px-4 pt-[112px] pb-[60px] sm:px-6">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left column: Copy */}
           <div style={useRevealStyle(vis, 0)}>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-brand/25 bg-brand-muted px-4 py-1.5">
@@ -119,7 +119,7 @@ function HeroSection() {
               </span>
             </div>
 
-            <h1 className="font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="font-display text-3xl font-bold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
               One platform.{" "}
               <span className="text-brand">Three signing</span>{" "}
               methods.{" "}
@@ -127,18 +127,18 @@ function HeroSection() {
             </h1>
 
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              Moonlight unifies electronic, DSC USB token, and Aadhaar OTP signatures
+              SignPad unifies electronic, DSC USB token, and Aadhaar OTP signatures
               into a single workflow platform. Upload. Design. Send. Track. Done.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button className="btn-shine h-12 rounded-lg bg-brand px-8 text-sm font-semibold text-brand-foreground hover:bg-brand/90 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
+              <Button className="h-12 rounded-lg bg-brand px-8 text-sm font-semibold text-brand-foreground hover:bg-brand/90">
                 Start Free Trial
-                <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="ml-2 size-4" />
               </Button>
               <Button
                 variant="outline"
-                className="h-12 rounded-lg border-border/60 px-8 text-sm font-semibold hover:border-brand/40 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200"
+                className="h-12 rounded-lg border-border/60 px-8 text-sm font-semibold hover:border-brand/40"
               >
                 Watch Demo
               </Button>
@@ -165,7 +165,7 @@ function HeroSection() {
           {/* Right column: Moonlight Hero SVG */}
           <div style={useRevealStyle(vis, 200)} className="relative">
             <div className="rounded-2xl border border-brand/15 bg-card/50 p-6 backdrop-blur-sm transition-all duration-500 hover:border-brand/30 hover:shadow-[0_16px_60px_var(--color-brand-glow)]">
-              <MoonlightHeroSvg className="w-full" />
+              <SignPadHeroSvg className="w-full" />
             </div>
             {/* Floating badge */}
             <div className="absolute -bottom-4 -left-4 rounded-xl border border-brand/20 bg-card px-4 py-3 shadow-lg animate-float-badge">
@@ -179,6 +179,10 @@ function HeroSection() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="mt-8 text-center animate-[scroll-hint_2.5s_ease-in-out_infinite] sm:mt-[48px]">
+            <ChevronDown className="mx-auto size-4 text-muted-foreground/60" />
           </div>
         </div>
       </div>
@@ -216,12 +220,12 @@ function TrustMarquee() {
 function ProductsGrid() {
   const { ref, vis } = useReveal();
   return (
-    <section ref={ref} className="mx-auto max-w-7xl px-6 py-24">
+    <section ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
         <Badge variant="outline" className="mb-4 border-border/60 font-mono text-xs">
           04 PRODUCTS
         </Badge>
-        <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
+        <h2 className="font-display text-2xl font-bold tracking-tight sm:text-4xl">
           The complete document signing{" "}
           <span className="text-brand">ecosystem</span>
         </h2>
@@ -268,16 +272,16 @@ function ProductsGrid() {
               {moonlight.platform}
             </Badge>
             <Badge variant="outline" className="border-brand/20 text-brand font-mono text-[10px]">
-              {moonlight.tech}
+              {moonlight.bestFor}
             </Badge>
             <Badge variant="outline" className="border-brand/20 text-brand font-mono text-[10px]">
               {moonlight.metric} {moonlight.metricLabel}
             </Badge>
           </div>
           <div className="mt-6">
-            <Link href="/products/moonlight">
-              <Button className="btn-shine h-10 bg-brand text-brand-foreground hover:bg-brand/90 hover:scale-[1.03] active:scale-[0.98] rounded-lg px-6 text-sm font-semibold transition-transform duration-200">
-                Explore Moonlight
+            <Link href="/products/signpad">
+              <Button className="h-10 bg-brand text-brand-foreground hover:bg-brand/90 hover:scale-[1.03] active:scale-[0.98] rounded-lg px-6 text-sm font-semibold transition-transform duration-200">
+                Explore SignPad
                 <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
               </Button>
             </Link>
@@ -328,7 +332,7 @@ function SignatureMethodsSection() {
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-0 top-1/2 -translate-y-1/2 h-[400px] w-[400px] rounded-full bg-brand/4 blur-[100px]" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
           <Badge variant="outline" className="mb-4 border-brand/20 text-brand font-mono text-xs">
             3 SIGNING METHODS
@@ -339,7 +343,7 @@ function SignatureMethodsSection() {
           </h2>
           <p className="mt-4 text-muted-foreground">
             Whether your signers prefer drawing a signature, plugging in a USB token,
-            or authenticating via Aadhaar OTP -- Moonlight handles it all.
+            or authenticating via Aadhaar OTP -- SignPad handles it all.
           </p>
         </div>
 
@@ -433,7 +437,7 @@ function SignatureMethodsSection() {
 function WorkflowSection() {
   const { ref, vis } = useReveal();
   return (
-    <section ref={ref} className="mx-auto max-w-7xl px-6 py-24">
+    <section ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
         <Badge variant="outline" className="mb-4 border-border/60 font-mono text-xs">
           HOW IT WORKS
@@ -483,7 +487,7 @@ function WorkflowSection() {
    ═══════════════════════════════════════════════════════════ */
 
 const competitors = [
-  { key: "moonlight" as const, name: "Moonlight", isSelf: true },
+  { key: "moonlight" as const, name: "SignPad", isSelf: true },
   { key: "docusign" as const, name: "DocuSign", isSelf: false },
   { key: "pandadoc" as const, name: "PandaDoc", isSelf: false },
   { key: "signnow" as const, name: "SignNow", isSelf: false },
@@ -548,13 +552,13 @@ function ComparisonSection() {
   const { ref, vis } = useReveal();
   return (
     <section ref={ref} className="bg-muted/20 py-24">
-      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
           <Badge variant="outline" className="mb-4 border-brand/20 text-brand font-mono text-xs">
             VS COMPETITORS
           </Badge>
           <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-            See how Moonlight{" "}
+            See how SignPad{" "}
             <span className="text-brand">stacks up</span>
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -643,8 +647,8 @@ function ComparisonSection() {
 function SecuritySection() {
   const { ref, vis } = useReveal();
   return (
-    <section ref={ref} className="mx-auto max-w-7xl px-6 py-24">
-      <div className="grid items-center gap-12 lg:grid-cols-2">
+    <section ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
+      <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
         <div style={useRevealStyle(vis)}>
           <Badge variant="outline" className="mb-4 border-brand/20 text-brand font-mono text-xs">
             TRUST & SECURITY
@@ -656,7 +660,7 @@ function SecuritySection() {
           <p className="mt-4 text-muted-foreground leading-relaxed">
             Every document is encrypted at rest and in transit with AES-256.
             Every signature includes a SHA-256 cryptographic audit trail.
-            Moonlight meets the most stringent global security and legal standards.
+            SignPad meets the most stringent global security and legal standards.
           </p>
           <div className="mt-8 space-y-4">
             {[
@@ -703,7 +707,7 @@ function TestimonialsSection() {
   const { ref, vis } = useReveal();
   return (
     <section ref={ref} className="bg-muted/20 py-24">
-      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
           <Badge variant="outline" className="mb-4 border-border/60 font-mono text-xs">
             CUSTOMER STORIES
@@ -753,10 +757,10 @@ function TestimonialsSection() {
 function MoonlightPricingSection() {
   const { ref, vis } = useReveal();
   return (
-    <section ref={ref} className="mx-auto max-w-7xl px-6 py-24">
+    <section ref={ref} className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
         <Badge variant="outline" className="mb-4 border-brand/20 text-brand font-mono text-xs">
-          MOONLIGHT PRICING
+          SIGNPAD PRICING
         </Badge>
         <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
           Start free.{" "}
@@ -767,7 +771,13 @@ function MoonlightPricingSection() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className={`mt-12 grid gap-6 ${
+        moonlight.pricing.length === 1
+          ? "mx-auto max-w-md grid-cols-1"
+          : moonlight.pricing.length === 2
+            ? "mx-auto max-w-2xl grid-cols-1 sm:grid-cols-2"
+            : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+      }`}>
         {moonlight.pricing.map((tier, i) => (
           <Card
             key={tier.tier}
@@ -810,7 +820,7 @@ function MoonlightPricingSection() {
               <Button
                 className={`w-full rounded-lg h-10 text-sm font-semibold hover:scale-[1.02] active:scale-[0.98] transition-transform duration-200 ${
                   tier.popular
-                    ? "btn-shine bg-brand text-brand-foreground hover:bg-brand/90"
+                    ? "bg-brand text-brand-foreground hover:bg-brand/90"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
@@ -836,8 +846,8 @@ function MoonlightPricingSection() {
 function IntegrationsSection() {
   const { ref, vis } = useReveal();
   return (
-    <section ref={ref} className="bg-muted/20 py-24">
-      <div className="mx-auto max-w-5xl px-6">
+    <section ref={ref} className="bg-muted/20 py-16 sm:py-24">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center" style={useRevealStyle(vis)}>
           <Badge variant="outline" className="mb-4 border-border/60 font-mono text-xs">
             INTEGRATIONS
@@ -849,7 +859,7 @@ function IntegrationsSection() {
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5" style={useRevealStyle(vis, 100)}>
-          {moonlight.integrations.map((integration, i) => (
+          {moonlight.benefits.map((integration, i) => (
             <div
               key={integration}
               className="flex items-center justify-center rounded-xl border border-border/50 bg-card/50 px-4 py-5 text-center font-mono text-xs text-muted-foreground hover-lift hover:border-brand/20 hover:text-foreground"
@@ -872,7 +882,7 @@ function FaqSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="mx-auto max-w-3xl px-6 py-24">
+    <section ref={ref} className="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
       <div className="text-center" style={useRevealStyle(vis)}>
         <Badge variant="outline" className="mb-4 border-border/60 font-mono text-xs">
           FAQ
@@ -937,17 +947,17 @@ function CtaSection() {
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[700px] rounded-full bg-brand/6 blur-[100px] animate-glow-pulse" />
         <div className="absolute left-1/4 top-1/3 h-[200px] w-[300px] rounded-full bg-brand/4 blur-[80px] animate-glow-pulse [animation-delay:1s]" />
       </div>
-      <div className="relative mx-auto max-w-3xl px-6 text-center" style={useRevealStyle(vis)}>
+      <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6" style={useRevealStyle(vis)}>
         <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
           Ready to modernize{" "}
           <span className="text-brand">document signing?</span>
         </h2>
         <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-          Join thousands of teams using Moonlight to replace wet signatures,
+          Join thousands of teams using SignPad to replace wet signatures,
           streamline workflows, and stay compliant.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button className="btn-shine h-12 rounded-lg bg-brand px-8 text-sm font-semibold text-brand-foreground hover:bg-brand/90 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
+          <Button className="h-12 rounded-lg bg-brand px-8 text-sm font-semibold text-brand-foreground hover:bg-brand/90 hover:scale-[1.03] active:scale-[0.98] transition-all duration-200">
             Start Free -- No Card Required
             <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-0.5" />
           </Button>

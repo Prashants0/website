@@ -13,24 +13,24 @@ import type { AccentColor } from "../data";
 export function ProductArchSvg({ slug, accent }: { slug: string; accent: AccentColor }) {
   const color = `var(--color-${accent})`;
   const configs: Record<string, { nodes: string[]; labels: string[] }> = {
-    "signsecure-win": {
-      nodes: ["PDF Folder", "JSON Template", "Batch Engine", "Cert Store", "Signed PDFs", "Gmail"],
-      labels: ["input", "config", "JavaFX 22", "CAPI", "PAdES+LTV", "OAuth2"],
+    signbolt: {
+      nodes: ["PDF / DOCX", "Template", "Batch Engine", "X.509 Cert", "PAdES Signed", "Email"],
+      labels: ["your files", "sig position", "signs all at once", "USB / Store", "LTV enabled", "auto-deliver"],
     },
     signbridge: {
-      nodes: ["Web App", "SDK Call", "localhost:53000", "JWT Auth", "Cert Store", "Signed Hash"],
-      labels: ["browser", "TypeScript", "HTTPS", "Ed25519", "CAPI/CNG", "response"],
+      nodes: ["Your Website", "JS SDK Call", "SignBridge Agent", "Token Signing", "Certificate Store", "Signed PDF"],
+      labels: ["any browser", "signBridge.sign()", "localhost:53000", "PKCS#11 / CAPI", "USB / Smart Card", "PAdES result"],
     },
-    "signly-api": {
-      nodes: ["HTTP POST", "API Gateway", "Lambda", "S3 Certs", "AcroForm", "Signed PDF"],
-      labels: ["REST", "JWT auth", "SnapStart", "PKCS#12", "lifecycle", "response"],
+    signlift: {
+      nodes: ["Your App", "HTTP POST", "JWT Auth", "SignLift API", "PKCS#12 Cert", "Signed PDF"],
+      labels: ["any language", "REST request", "X-API-Token", "PAdES engine", "file / S3", "LTV response"],
     },
-    moonlight: {
+    signpad: {
       nodes: ["Upload PDF", "Form Builder", "Workflow", "Sign Method", "Audit Log", "Complete"],
       labels: ["drag-drop", "fields", "seq/parallel", "3 methods", "SHA-256", "webhook"],
     },
   };
-  const c = configs[slug] ?? configs["signsecure-win"];
+  const c = configs[slug] ?? configs["signbolt"];
 
   return (
     <svg viewBox="0 0 660 80" fill="none" className="w-full">
@@ -95,7 +95,7 @@ export function ProductArchSvg({ slug, accent }: { slug: string; accent: AccentC
    ═══════════════════════════════════════════════════════════ */
 
 export const useCaseIcons: Record<string, React.ReactNode[]> = {
-  "signsecure-win": [
+  signbolt: [
     // Government
     <svg key="gov" viewBox="0 0 32 32" fill="none" className="size-8">
       <path d="M4 28 L4 14 L16 6 L28 14 L28 28" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
@@ -150,7 +150,7 @@ export const useCaseIcons: Record<string, React.ReactNode[]> = {
       <path d="M12 20 L16 28 L20 20" stroke="var(--color-violet)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
     </svg>,
   ],
-  "signly-api": [
+  signlift: [
     // SaaS platform
     <svg key="saas" viewBox="0 0 32 32" fill="none" className="size-8">
       <rect x="4" y="4" width="24" height="16" rx="3" stroke="var(--color-cyan)" strokeWidth="1.5" fill="var(--color-cyan)" fillOpacity="0.08" />
@@ -181,7 +181,7 @@ export const useCaseIcons: Record<string, React.ReactNode[]> = {
       <rect x="8" y="21" width="12" height="3" rx="1" stroke="var(--color-cyan)" strokeWidth="0.8" fill="none" opacity="0.3" />
     </svg>,
   ],
-  moonlight: [
+  signpad: [
     // Company
     <svg key="company" viewBox="0 0 32 32" fill="none" className="size-8">
       <rect x="4" y="8" width="12" height="20" rx="2" stroke="var(--color-amber)" strokeWidth="1.5" fill="var(--color-amber)" fillOpacity="0.08" />

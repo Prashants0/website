@@ -6,8 +6,8 @@
    Extracted from apps/web/src/app/(marketing)/products/[slug]/page.tsx
    ═══════════════════════════════════════════════════════════ */
 
-/** SignSecure Win: Batch document processing factory */
-export function WinHeroSvg({ className = "" }: { className?: string }) {
+/** SignBolt: Batch document processing factory */
+export function SignBoltHeroSvg({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -111,7 +111,7 @@ export function WinHeroSvg({ className = "" }: { className?: string }) {
   );
 }
 
-/** SignBridge: Localhost bridge architecture */
+/** SignBridge: Localhost bridge architecture (unchanged) */
 export function BridgeHeroSvg({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,8 +207,8 @@ export function BridgeHeroSvg({ className = "" }: { className?: string }) {
   );
 }
 
-/** Signly API: Serverless cloud architecture */
-export function ApiHeroSvg({ className = "" }: { className?: string }) {
+/** SignLift: Serverless cloud architecture */
+export function SignLiftHeroSvg({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -300,8 +300,8 @@ export function ApiHeroSvg({ className = "" }: { className?: string }) {
   );
 }
 
-/** Moonlight: Multi-method signing platform */
-export function MoonlightHeroSvg({ className = "" }: { className?: string }) {
+/** SignPad: Multi-method signing platform */
+export function SignPadHeroSvg({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 480 360" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -402,8 +402,8 @@ export function MoonlightHeroSvg({ className = "" }: { className?: string }) {
 
 /** Map slug to hero SVG component */
 export const productHeroSvgs: Record<string, React.ReactNode> = {
-  "signsecure-win": <WinHeroSvg className="w-full" />,
+  signbolt: <SignBoltHeroSvg className="w-full" />,
   signbridge: <BridgeHeroSvg className="w-full" />,
-  "signly-api": <ApiHeroSvg className="w-full" />,
-  moonlight: <MoonlightHeroSvg className="w-full" />,
+  signlift: <SignLiftHeroSvg className="w-full" />,
+  signpad: <SignPadHeroSvg className="w-full" />,
 };

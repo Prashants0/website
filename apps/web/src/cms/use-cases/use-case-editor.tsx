@@ -187,7 +187,7 @@ export default function CmsUseCaseEditor({ initial }: { initial: UseCaseEditorIn
                   setProduct(e.target.value);
                   scheduleSave();
                 }}
-                placeholder="e.g. SignSecure Win, SignBridge"
+                placeholder="e.g. SignBolt, SignBridge"
               />
             </div>
           </div>
