@@ -117,13 +117,27 @@ function SignBoltWalkthrough({
     },
     {
       num: "03",
-      title: "Select Your Certificate",
-      desc: "Choose which digital certificate to use — USB token, smart card, or an installed certificate file. SignBolt detects all certificates available on your machine.",
-      detail: "X.509 certificates",
+      title: "Plug In Your Token",
+      desc: "Insert your USB DSC token. SignBolt detects all certificates on your machine — hardware tokens or installed .pfx files.",
+      detail: "USB token / .pfx",
       icon: (
         <svg viewBox="0 0 48 48" fill="none" className="size-10">
-          <path d="M24 4 L38 12 L38 26 Q38 38 24 44 Q10 38 10 26 L10 12 Z" stroke="var(--color-brand)" strokeWidth="2" fill="var(--color-brand)" fillOpacity="0.06" />
-          <path d="M18 24 L22 28 L30 20" stroke="var(--color-brand)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+          {/* USB connector prongs */}
+          <rect x="19" y="2" width="10" height="5" rx="1.5" stroke="var(--color-brand)" strokeWidth="1.5" fill="none" />
+          <rect x="21.5" y="3.5" width="2" height="2" rx="0.5" fill="var(--color-brand)" opacity="0.5" />
+          <rect x="24.5" y="3.5" width="2" height="2" rx="0.5" fill="var(--color-brand)" opacity="0.5" />
+          {/* Token body */}
+          <rect x="16" y="6" width="16" height="26" rx="3" stroke="var(--color-brand)" strokeWidth="1.8" fill="var(--color-brand)" fillOpacity="0.05" />
+          {/* Chip contact pad with grid */}
+          <rect x="19" y="12" width="10" height="7" rx="1.5" stroke="var(--color-brand)" strokeWidth="1.2" fill="var(--color-brand)" fillOpacity="0.08" />
+          <line x1="19" y1="15.5" x2="29" y2="15.5" stroke="var(--color-brand)" strokeWidth="0.6" opacity="0.3" />
+          <line x1="24" y1="12" x2="24" y2="19" stroke="var(--color-brand)" strokeWidth="0.6" opacity="0.3" />
+          {/* LED indicator */}
+          <circle cx="24" cy="25" r="1.8" fill="var(--color-success)" opacity="0.6" />
+          <circle cx="24" cy="25" r="1" fill="var(--color-success)" opacity="0.9" />
+          {/* Shield below token */}
+          <path d="M24 34 L31 37 L31 41 Q31 45 24 47 Q17 45 17 41 L17 37 Z" stroke="var(--color-brand)" strokeWidth="1.3" fill="var(--color-brand)" fillOpacity="0.06" />
+          <path d="M22 40.5 L23.5 42 L27 39" stroke="var(--color-brand)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
         </svg>
       ),
     },
@@ -214,8 +228,8 @@ function SignBridgeWalkthrough({
     {
       num: "02",
       title: "Plug In Your Token",
-      desc: "Insert your USB token or smart card. SignBridge automatically detects your digital certificate from the Windows Certificate Store -- no manual configuration.",
-      detail: "USB tokens & smart cards",
+      desc: "Insert your USB token. SignBridge automatically detects your digital certificate from the Windows Certificate Store -- no manual configuration.",
+      detail: "USB tokens & certificates",
       icon: (
         <svg viewBox="0 0 48 48" fill="none" className="size-10">
           <rect x="17" y="4" width="14" height="10" rx="2" stroke="var(--color-violet)" strokeWidth="1.5" fill="none" opacity="0.3" />
@@ -566,7 +580,7 @@ function SignPadSigningMethods({
     {
       name: "USB Digital Certificate (DSC)",
       headline: "Cryptographically verifiable",
-      desc: "Signers use their USB token or smart card — the private key never leaves the hardware. The document gets a PAdES-compliant digital signature that any PDF reader can verify. Best for government filings, tenders, and regulated industries.",
+      desc: "Signers use their USB token — the private key never leaves the hardware. The document gets a PAdES-compliant digital signature that any PDF reader can verify. Best for government filings, tenders, and regulated industries.",
       standard: "X.509 / PAdES / IT Act Section 3A",
       icon: (
         <svg viewBox="0 0 48 48" fill="none" className="size-12">
@@ -1012,16 +1026,16 @@ export default function ProductPage({
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-3.5">
+                <div className="flex w-full flex-wrap gap-3 sm:w-auto sm:gap-3.5">
                   <Button
-                    className={`h-auto rounded-xl ${accentBgMap[accent]} px-8 py-4 text-[15px] font-semibold text-white ${accentGlowMap[accent]} hover:opacity-90`}
+                    className={`h-auto flex-1 rounded-xl ${accentBgMap[accent]} px-6 py-3 text-sm font-semibold text-white sm:flex-none sm:px-8 sm:py-4 sm:text-[15px] ${accentGlowMap[accent]} hover:opacity-90`}
                   >
                     Download Free
                     <ArrowRight className="ml-2 size-4" />
                   </Button>
                   <Button
                     variant="outline"
-                    className="h-auto rounded-xl px-8 py-4 text-[15px] font-semibold"
+                    className="h-auto flex-1 rounded-xl px-6 py-3 text-sm font-semibold sm:flex-none sm:px-8 sm:py-4 sm:text-[15px]"
                     render={<Link href="/pricing" />}
                   >
                     View Pricing
@@ -1030,12 +1044,12 @@ export default function ProductPage({
               </div>
 
               {/* Row 2: Full-width canvas graphic — the star of the show */}
-              <div className="mt-10" style={rs(heroR.vis, 150)}>
-                <SignBridgeHeroCanvas className="h-[420px] w-full lg:h-[500px]" />
+              <div className="mt-8 sm:mt-10" style={rs(heroR.vis, 150)}>
+                <SignBridgeHeroCanvas className="h-[560px] w-full sm:h-[380px] md:h-[420px] lg:h-[480px]" />
               </div>
 
               {/* Row 3: Description + highlights strip */}
-              <div className="mt-8 grid grid-cols-1 gap-6 rounded-2xl border border-violet/10 bg-card/50 p-5 sm:grid-cols-2 sm:gap-8 sm:p-8 lg:grid-cols-[1fr_auto_auto_auto]" style={rs(heroR.vis, 300)}>
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-4 rounded-2xl border border-violet/10 bg-card/50 p-4 sm:grid-cols-2 sm:gap-8 sm:p-8 lg:grid-cols-[1fr_auto_auto_auto]" style={rs(heroR.vis, 300)}>
                 <p className="max-w-[520px] text-sm leading-relaxed text-muted-foreground">
                   {product.longDesc}
                 </p>
@@ -1105,7 +1119,7 @@ export default function ProductPage({
 
               {/* Row 2: Full-width canvas — signing flow diagram */}
               <div className="mt-10" style={rs(heroR.vis, 150)}>
-                <SignPadHeroCanvas className="h-[420px] w-full lg:h-[500px]" />
+                <SignPadHeroCanvas className="h-[640px] w-full sm:h-[420px] lg:h-[500px]" />
               </div>
 
               {/* Row 3: Description + highlights strip */}
@@ -1302,7 +1316,7 @@ export default function ProductPage({
                   <div key={i} className="rounded-xl border border-violet/8 bg-muted/40 p-5">
                     <div className="mb-2 text-sm font-semibold text-foreground/80">{item.step}</div>
                     <p className="mb-3 text-xs leading-relaxed text-muted-foreground">{item.detail}</p>
-                    <code className="rounded bg-violet-muted px-2 py-1 font-mono text-[10px] text-violet">
+                    <code className="inline-block max-w-full break-all rounded bg-violet-muted px-2 py-1 font-mono text-[10px] text-violet">
                       {item.code}
                     </code>
                   </div>
@@ -1865,7 +1879,7 @@ Content-Disposition: attachment;
                   {/* CTA row */}
                   <div className="flex flex-col items-center gap-4 sm:flex-row">
                     <Button
-                      className="h-auto rounded-xl bg-violet px-10 py-4 text-[15px] font-semibold text-white shadow-[0_4px_20px_oklch(0.541_0.281_293.009/0.12)] hover:opacity-90"
+                      className="h-auto w-full rounded-xl bg-violet px-8 py-3.5 text-sm font-semibold text-white shadow-[0_4px_20px_oklch(0.541_0.281_293.009/0.12)] hover:opacity-90 sm:w-auto sm:px-10 sm:py-4 sm:text-[15px]"
                     >
                       Talk to Us
                       <ArrowRight className="ml-2 size-4" />
@@ -1878,14 +1892,14 @@ Content-Disposition: attachment;
               </Card>
 
               {/* Trust strip */}
-              <div className="mx-auto mt-10 flex max-w-[600px] flex-wrap items-center justify-center gap-x-8 gap-y-3 text-center text-xs text-muted-foreground" style={rs(pricingR.vis, 250)}>
+              <div className="mx-auto mt-8 flex max-w-[600px] flex-col items-center justify-center gap-3 text-center text-xs text-muted-foreground sm:mt-10 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3" style={rs(pricingR.vis, 250)}>
                 {[
                   "No fixed tiers",
                   "Tailored to your scale",
                   "Private key never leaves your token",
                 ].map((t2) => (
                   <span key={t2} className="flex items-center gap-1.5">
-                    <svg viewBox="0 0 12 12" fill="none" className="size-3 text-violet">
+                    <svg viewBox="0 0 12 12" fill="none" className="size-3 shrink-0 text-violet">
                       <path d="M3 6 L5 8 L9 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     {t2}

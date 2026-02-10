@@ -19,7 +19,7 @@ export function ProductArchSvg({ slug, accent }: { slug: string; accent: AccentC
     },
     signbridge: {
       nodes: ["Your Website", "JS SDK Call", "SignBridge Agent", "Token Signing", "Certificate Store", "Signed PDF"],
-      labels: ["any browser", "signBridge.sign()", "localhost:53000", "PKCS#11 / CAPI", "USB / Smart Card", "PAdES result"],
+      labels: ["any browser", "signBridge.sign()", "localhost:53000", "PKCS#11 / CAPI", "USB / Store", "PAdES result"],
     },
     signlift: {
       nodes: ["Your App", "HTTP POST", "JWT Auth", "SignLift API", "PKCS#12 Cert", "Signed PDF"],

@@ -58,7 +58,7 @@ const pricingCards = [
       "Unlimited PDFs & connected apps",
       "Full JavaScript SDK",
       "Encryption & batch operations",
-      "USB token & smart card support",
+      "USB token & certificate support",
       "HMAC-SHA256 session isolation",
       "Priority support",
     ],

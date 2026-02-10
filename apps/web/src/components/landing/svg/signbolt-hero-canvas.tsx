@@ -184,7 +184,8 @@ function drawUnsignedStack(
 }
 
 /* ─────────────────────────────────────────────────────────
-   DRAW: SignBolt engine (stage 2) — gear + shield
+   DRAW: SignBolt engine (stage 2) — large DSC token in box,
+   processing indicator above the box
    ───────────────────────────────────────────────────────── */
 function drawEngine(
   ctx: CanvasRenderingContext2D,
@@ -195,12 +196,45 @@ function drawEngine(
   p: ReturnType<typeof pal>,
   dark: boolean,
 ) {
-  const boxW = 140 * scale;
-  const boxH = 130 * scale;
+  const boxW = 130 * scale;
+  const boxH = 120 * scale;
   const bx = cx - boxW / 2;
-  const by = cy - boxH / 2;
+  const by = cy - boxH / 2 + 10 * scale; // nudge box down to make room above
 
-  // Box background
+  // ══ PROCESSING INDICATOR — above the box ══
+  // Small rotating gear + "Signing…" label between step badge and box
+  const indY = by - 18 * scale;
+  const gR = 7 * scale;
+
+  ctx.save();
+  ctx.translate(cx - 20 * scale, indY);
+  ctx.rotate(t * 0.5);
+  const teeth = 6;
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.3 : 0.25);
+  ctx.lineWidth = 1.8 * scale;
+  ctx.lineCap = "round";
+  for (let i = 0; i < teeth; i++) {
+    const a = (i / teeth) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(Math.cos(a) * gR * 0.5, Math.sin(a) * gR * 0.5);
+    ctx.lineTo(Math.cos(a) * gR, Math.sin(a) * gR);
+    ctx.stroke();
+  }
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.18 : 0.13);
+  ctx.lineWidth = 1 * scale;
+  ctx.beginPath();
+  ctx.arc(0, 0, gR * 0.5, 0, Math.PI * 2);
+  ctx.stroke();
+  ctx.restore();
+
+  // "Signing…" text next to gear
+  ctx.fillStyle = rgba(p.brand, dark ? 0.55 : 0.5);
+  ctx.font = `600 ${Math.round(9 * scale)}px -apple-system, system-ui, sans-serif`;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "middle";
+  ctx.fillText("Signing\u2026", cx - 10 * scale, indY);
+
+  // ══ BOX ══
   ctx.save();
   ctx.shadowColor = dark ? "rgba(0,0,0,0.35)" : "rgba(8,15,45,0.16)";
   ctx.shadowBlur = 24;
@@ -210,14 +244,13 @@ function drawEngine(
   ctx.fill();
   ctx.restore();
 
-  // Border
   ctx.strokeStyle = rgba(p.brand, dark ? 0.35 : 0.3);
   ctx.lineWidth = 2;
   rrect(ctx, bx, by, boxW, boxH, 12);
   ctx.stroke();
 
   // Header bar
-  const hH = 28 * scale;
+  const hH = 24 * scale;
   ctx.fillStyle = rgba(p.brand, dark ? 0.08 : 0.05);
   rrect(ctx, bx, by, boxW, hH, [12, 12, 0, 0]);
   ctx.fill();
@@ -235,93 +268,114 @@ function drawEngine(
   ctx.textBaseline = "middle";
   ctx.fillText("SignBolt", cx, by + hH / 2);
 
-  // Rotating gear
-  const gearCy = by + hH + (boxH - hH) * 0.4;
-  const gearR = 22 * scale;
+  // ══ DSC TOKEN — centered inside the box ══
+  const contentTop = by + hH + 3 * scale;
+  const contentH = boxH - hH - 6 * scale;
 
-  ctx.save();
-  ctx.translate(cx, gearCy);
-  ctx.rotate(t * 0.35);
+  const tokW = 30 * scale;
+  const tokH = Math.min(contentH * 0.8, 68 * scale);
+  const tokX = cx - tokW / 2;
+  const tokY = contentTop + (contentH - tokH) / 2;
 
-  // Gear teeth
-  const teeth = 8;
-  ctx.strokeStyle = rgba(p.brand, dark ? 0.25 : 0.2);
-  ctx.lineWidth = 4 * scale;
-  ctx.lineCap = "round";
-  for (let i = 0; i < teeth; i++) {
-    const a = (i / teeth) * Math.PI * 2;
-    ctx.beginPath();
-    ctx.moveTo(Math.cos(a) * gearR * 0.55, Math.sin(a) * gearR * 0.55);
-    ctx.lineTo(Math.cos(a) * gearR, Math.sin(a) * gearR);
-    ctx.stroke();
-  }
+  // USB connector (top of token)
+  const usbW = tokW * 0.5;
+  const usbH = 9 * scale;
+  const usbX = cx - usbW / 2;
+  const usbY = tokY - usbH + 2 * scale;
 
-  // Outer ring
-  ctx.strokeStyle = rgba(p.brand, dark ? 0.2 : 0.15);
-  ctx.lineWidth = 2 * scale;
-  ctx.beginPath();
-  ctx.arc(0, 0, gearR * 0.55, 0, Math.PI * 2);
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.55 : 0.45);
+  ctx.lineWidth = 1.5;
+  rrect(ctx, usbX, usbY, usbW, usbH, 2);
   ctx.stroke();
-
-  // Center dot
-  ctx.fillStyle = rgba(p.brand, dark ? 0.25 : 0.18);
-  ctx.beginPath();
-  ctx.arc(0, 0, gearR * 0.2, 0, Math.PI * 2);
+  ctx.fillStyle = rgba(p.brand, dark ? 0.05 : 0.03);
   ctx.fill();
 
+  // Two prongs inside connector
+  const prW = 3.5 * scale;
+  const prH = usbH * 0.45;
+  const prY = usbY + usbH * 0.28;
+  ctx.fillStyle = rgba(p.brand, dark ? 0.45 : 0.35);
+  rrect(ctx, cx - prW * 1.4, prY, prW, prH, 0.8);
+  ctx.fill();
+  rrect(ctx, cx + prW * 0.4, prY, prW, prH, 0.8);
+  ctx.fill();
+
+  // Token body
+  ctx.save();
+  ctx.shadowColor = dark ? "rgba(0,0,0,0.2)" : "rgba(8,15,45,0.1)";
+  ctx.shadowBlur = 8;
+  ctx.shadowOffsetY = 3;
+  ctx.fillStyle = rgba(p.cardBg, 1);
+  rrect(ctx, tokX, tokY, tokW, tokH, 6);
+  ctx.fill();
   ctx.restore();
 
-  // Shield icon below gear
-  const shY = gearCy + gearR + 10 * scale;
-  const shS = 12 * scale;
-  ctx.strokeStyle = rgba(p.brand, dark ? 0.4 : 0.35);
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(cx, shY - shS);
-  ctx.lineTo(cx + shS, shY - shS * 0.5);
-  ctx.lineTo(cx + shS, shY + shS * 0.3);
-  ctx.quadraticCurveTo(cx + shS, shY + shS, cx, shY + shS * 1.2);
-  ctx.quadraticCurveTo(cx - shS, shY + shS, cx - shS, shY + shS * 0.3);
-  ctx.lineTo(cx - shS, shY - shS * 0.5);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fillStyle = rgba(p.brand, dark ? 0.06 : 0.04);
-  ctx.fill();
-
-  // Checkmark inside shield
-  ctx.strokeStyle = rgba(p.brand, dark ? 0.6 : 0.55);
-  ctx.lineWidth = 2;
-  ctx.lineCap = "round";
-  ctx.lineJoin = "round";
-  ctx.beginPath();
-  ctx.moveTo(cx - shS * 0.3, shY + shS * 0.15);
-  ctx.lineTo(cx - shS * 0.05, shY + shS * 0.4);
-  ctx.lineTo(cx + shS * 0.35, shY - shS * 0.1);
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.5 : 0.4);
+  ctx.lineWidth = 1.8;
+  rrect(ctx, tokX, tokY, tokW, tokH, 6);
   ctx.stroke();
 
-  // Progress bar
-  const barW = boxW * 0.7;
-  const barH = 5 * scale;
-  const barX = cx - barW / 2;
-  const barY = by + boxH - 14 * scale;
-  ctx.fillStyle = rgba(p.brand, dark ? 0.06 : 0.05);
-  rrect(ctx, barX, barY, barW, barH, 3);
+  // Gold chip contact pad
+  const cpW = tokW * 0.6;
+  const cpH = tokH * 0.18;
+  const cpX = cx - cpW / 2;
+  const cpY = tokY + tokH * 0.15;
+  ctx.fillStyle = rgba(p.brand, dark ? 0.08 : 0.06);
+  rrect(ctx, cpX, cpY, cpW, cpH, 2);
   ctx.fill();
-  const progress = Math.sin(t * 0.45) * 0.25 + 0.75;
-  ctx.fillStyle = rgba(p.brand, dark ? 0.25 : 0.18);
-  rrect(ctx, barX, barY, barW * progress, barH, 3);
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.35 : 0.28);
+  ctx.lineWidth = 1;
+  rrect(ctx, cpX, cpY, cpW, cpH, 2);
+  ctx.stroke();
+
+  // Chip grid lines
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.15 : 0.12);
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.moveTo(cpX, cpY + cpH * 0.5);
+  ctx.lineTo(cpX + cpW, cpY + cpH * 0.5);
+  ctx.moveTo(cx, cpY);
+  ctx.lineTo(cx, cpY + cpH);
+  ctx.stroke();
+
+  // LED indicator (pulsing green)
+  const ledY = tokY + tokH * 0.52;
+  const ledR = 3.5 * scale;
+  const pulse = Math.sin(t * 2.5) * 0.3 + 0.7;
+  ctx.fillStyle = rgba(p.green, dark ? 0.2 * pulse : 0.15 * pulse);
+  ctx.beginPath();
+  ctx.arc(cx, ledY, ledR * 1.8, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.fillStyle = rgba(p.green, dark ? 0.65 * pulse : 0.55 * pulse);
+  ctx.beginPath();
+  ctx.arc(cx, ledY, ledR, 0, Math.PI * 2);
   ctx.fill();
 
-  // Label below box
+  // "DSC" text on token body
+  ctx.fillStyle = rgba(p.brand, dark ? 0.4 : 0.35);
+  ctx.font = `800 ${Math.round(9 * scale)}px -apple-system, system-ui, sans-serif`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("DSC", cx, tokY + tokH * 0.72);
+
+  // Lanyard hole
+  const holeY = tokY + tokH * 0.89;
+  ctx.strokeStyle = rgba(p.brand, dark ? 0.2 : 0.15);
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.arc(cx, holeY, 2.5 * scale, 0, Math.PI * 2);
+  ctx.stroke();
+
+  // ══ LABELS — below box ══
   ctx.fillStyle = rgba(p.fg, dark ? 0.7 : 0.8);
   ctx.font = `700 ${Math.round(12 * scale)}px -apple-system, system-ui, sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.fillText("Batch Signing", cx, by + boxH + 14 * scale);
+  ctx.fillText("USB / DSC Token", cx, by + boxH + 14 * scale);
 
   ctx.fillStyle = rgba(p.fgMuted, dark ? 0.45 : 0.55);
   ctx.font = `500 ${Math.round(9 * scale)}px -apple-system, system-ui, sans-serif`;
-  ctx.fillText("PAdES + LTV Signatures", cx, by + boxH + 30 * scale);
+  ctx.fillText("Digital certificate signing", cx, by + boxH + 30 * scale);
 }
 
 /* ─────────────────────────────────────────────────────────
@@ -519,31 +573,38 @@ function drawAll(
   );
 
   // ── Bottom crypto strip ──
-  const stripY = h * 0.92;
-  const labels = ["SHA-256", "X.509", "PAdES", "LTV", "Tamper-Proof"];
-  const stripGap = Math.min(w * 0.17, 95);
+  const stripY = h * 0.90;
+  const labels = ["DSC Token", "SHA-256", "X.509", "PAdES", "LTV", "Tamper-Proof"];
+  const stripGap = Math.min(w * 0.16, 88);
   const stripW = (labels.length - 1) * stripGap;
   const stripX = w / 2 - stripW / 2;
 
   // Line
-  ctx.strokeStyle = rgba(p.line, dark ? 0.1 : 0.16);
-  ctx.lineWidth = 0.8;
+  ctx.strokeStyle = rgba(p.line, dark ? 0.12 : 0.2);
+  ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.moveTo(stripX - 8, stripY);
-  ctx.lineTo(stripX + stripW + 8, stripY);
+  ctx.moveTo(stripX - 10, stripY);
+  ctx.lineTo(stripX + stripW + 10, stripY);
   ctx.stroke();
+
+  const dotR = 3.5 * scale;
+  const fontSize = Math.max(Math.round(11 * scale), 10);
 
   for (let i = 0; i < labels.length; i++) {
     const lx = stripX + i * stripGap;
-    ctx.fillStyle = rgba(p.brand, dark ? 0.25 : 0.35);
+
+    // Dot
+    ctx.fillStyle = rgba(p.brand, dark ? 0.35 : 0.45);
     ctx.beginPath();
-    ctx.arc(lx, stripY, 3, 0, Math.PI * 2);
+    ctx.arc(lx, stripY, dotR, 0, Math.PI * 2);
     ctx.fill();
-    ctx.fillStyle = rgba(p.fgMuted, dark ? 0.35 : 0.5);
-    ctx.font = `600 ${Math.round(8 * scale)}px monospace`;
+
+    // Label
+    ctx.fillStyle = rgba(p.fgMuted, dark ? 0.55 : 0.7);
+    ctx.font = `700 ${fontSize}px -apple-system, system-ui, monospace`;
     ctx.textAlign = "center";
     ctx.textBaseline = "top";
-    ctx.fillText(labels[i], lx, stripY + 7);
+    ctx.fillText(labels[i], lx, stripY + 8 * scale);
   }
 }
 

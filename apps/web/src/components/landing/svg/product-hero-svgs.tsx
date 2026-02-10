@@ -180,7 +180,7 @@ export function BridgeHeroSvg({ className = "" }: { className?: string }) {
             <circle cx="14" cy="11" r="6" stroke="var(--color-violet)" strokeWidth="0.8" fill="none" opacity="0.3" />
             <path d={`M11 11 L13 13 L17 9`} stroke="var(--color-violet)" strokeWidth="0.8" strokeLinecap="round" fill="none" opacity="0.5" />
             <text x="28" y="9" fill="currentColor" fontSize="6.5" fontFamily="var(--font-mono)" opacity="0.7">{["RSA-2048 Cert", "ECDSA P-256", "USB Token (ePass)"][i]}</text>
-            <text x="28" y="17" fill="currentColor" fontSize="5.5" fontFamily="var(--font-mono)" opacity="0.5">{["Windows Store", "Smart Card", "Hardware"][i]}</text>
+            <text x="28" y="17" fill="currentColor" fontSize="5.5" fontFamily="var(--font-mono)" opacity="0.5">{["Windows Store", "PKCS#11", "Hardware"][i]}</text>
           </g>
         ))}
         <text x="80" y="150" textAnchor="middle" fill="var(--color-violet)" fontSize="8" fontFamily="var(--font-mono)" fontWeight="600" opacity="0.6">SIGNBRIDGE</text>

@@ -155,7 +155,7 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Private keys:</strong> SignBolt and SignBridge perform
                   all cryptographic operations locally on your device. Private
-                  keys from USB tokens, smart cards, or certificates are never
+                  keys from USB tokens or certificates are never
                   transmitted to or stored on SignSecure servers.
                 </li>
                 <li>

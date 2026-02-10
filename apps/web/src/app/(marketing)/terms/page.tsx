@@ -108,7 +108,7 @@ export default function TermsOfServicePage() {
                 <li>
                   <strong>SignBolt</strong> &mdash; A Windows desktop application
                   for batch signing PDFs using digital certificates (USB tokens,
-                  smart cards, or .pfx files).
+                  or .pfx files).
                 </li>
                 <li>
                   <strong>SignBridge</strong> &mdash; A Windows desktop companion
