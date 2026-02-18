@@ -1,3 +1,3 @@
 {
-  "extends": "@website-convex/config/tsconfig.base.json"
+  "extends": "@signsecure/config/tsconfig.base.json"
 }

@@ -1,8 +1,5 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { api } from "@website-convex/backend/convex/_generated/api";
-
 import { authClient } from "@/lib/auth-client";
 import Dashboard from "./dashboard";
 
@@ -14,7 +11,6 @@ export default function DashboardPage() {
   }
 
   if (!session.data?.user) {
-    // Redirect to login
     if (typeof window !== "undefined") {
       window.location.href = "/login";
     }

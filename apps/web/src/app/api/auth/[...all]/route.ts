@@ -1,3 +1,10 @@
-import { handler } from "@/lib/auth-server";
+// TODO: Replace with your new backend auth handler
+import { NextResponse } from "next/server";
 
-export const { GET, POST } = handler;
+export async function GET() {
+  return NextResponse.json({ error: "Auth not configured" }, { status: 501 });
+}
+
+export async function POST() {
+  return NextResponse.json({ error: "Auth not configured" }, { status: 501 });
+}

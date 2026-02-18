@@ -1,5 +1,5 @@
 {
-  "name": "@website-convex/env",
+  "name": "@signsecure/env",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@website-convex/config": "workspace:*",
+    "@signsecure/config": "workspace:*",
     "typescript": "catalog:"
   }
 }

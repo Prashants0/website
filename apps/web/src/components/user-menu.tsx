@@ -1,5 +1,3 @@
-import { api } from "@website-convex/backend/convex/_generated/api";
-import { useQuery } from "convex/react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -17,7 +15,8 @@ import { Button } from "./ui/button";
 
 export default function UserMenu() {
   const router = useRouter();
-  const user = useQuery(api.auth.getCurrentUser);
+  const session = authClient.useSession();
+  const user = session.data?.user;
 
   return (
     <DropdownMenu>

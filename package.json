@@ -1,5 +1,5 @@
 {
-  "name": "website-convex",
+  "name": "signsecure-website",
   "private": true,
   "workspaces": {
     "packages": [
@@ -10,9 +10,7 @@
       "dotenv": "^17.2.2",
       "zod": "^4.1.13",
       "typescript": "^5",
-      "convex": "^1.31.2",
-      "better-auth": "1.4.9",
-      "@convex-dev/better-auth": "^0.10.9"
+      "better-auth": "1.4.9"
     }
   },
   "type": "module",
@@ -20,18 +18,15 @@
     "dev": "turbo dev",
     "build": "turbo build",
     "check-types": "turbo check-types",
-    "dev:native": "turbo -F native dev",
-    "dev:web": "turbo -F web dev",
-    "dev:server": "turbo -F @website-convex/backend dev",
-    "dev:setup": "turbo -F @website-convex/backend dev:setup"
+    "dev:web": "turbo -F web dev"
   },
   "dependencies": {
-    "@website-convex/env": "workspace:*",
+    "@signsecure/env": "workspace:*",
     "dotenv": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@website-convex/config": "workspace:*",
+    "@signsecure/config": "workspace:*",
     "turbo": "^2.6.3",
     "typescript": "catalog:"
   },

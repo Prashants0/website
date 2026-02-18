@@ -4,7 +4,6 @@ import { DM_Sans, Playfair_Display, JetBrains_Mono } from "next/font/google";
 
 import "../index.css";
 import Providers from "@/components/providers";
-import { getToken } from "@/lib/auth-server";
 
 const dmSans = DM_Sans({
   variable: "--font-dm-sans",
@@ -32,13 +31,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const token = await getToken();
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${dmSans.variable} ${playfair.variable} ${jetbrainsMono.variable} antialiased`}
       >
-        <Providers initialToken={token}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

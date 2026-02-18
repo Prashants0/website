@@ -1,4 +1,4 @@
-import "@website-convex/env/web";
+import "@signsecure/env/web";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
