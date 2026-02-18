@@ -32,7 +32,6 @@ const footerColumns: { title: string; links: FooterLink[] }[] = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Blog", href: "#", external: true },
       { label: "Careers", href: "#", external: true },
       { label: "Contact", href: "/contact" },
       { label: "Privacy Policy", href: "/privacy" },
@@ -47,11 +46,8 @@ export function LandingFooter() {
       <div className="mx-auto max-w-[1240px] px-4 sm:px-7">
         <div className="mb-14 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr]">
           <div>
-            <Link href="/" className="mb-5 flex items-center gap-2.5 no-underline">
-              <Logo size={34} variant="white" className="shrink-0" />
-              <span className="font-display text-xl font-extrabold text-[#E4E7EC]">
-                SignSecure
-              </span>
+            <Link href="/" className="mb-5 inline-flex items-center no-underline">
+              <Logo size={58} variant="white" className="shrink-0" />
             </Link>
             <p className="max-w-[300px] text-sm leading-relaxed text-[#8294AA]">
               Document signing made simple. Four powerful tools to sign, send,

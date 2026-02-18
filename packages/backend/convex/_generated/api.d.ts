@@ -9,8 +9,6 @@
  */
 
 import type * as auth from "../auth.js";
-import type * as cmsBlog from "../cmsBlog.js";
-import type * as cmsUseCases from "../cmsUseCases.js";
 import type * as healthCheck from "../healthCheck.js";
 import type * as http from "../http.js";
 import type * as lib_admin from "../lib/admin.js";
@@ -24,8 +22,6 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
-  cmsBlog: typeof cmsBlog;
-  cmsUseCases: typeof cmsUseCases;
   healthCheck: typeof healthCheck;
   http: typeof http;
   "lib/admin": typeof lib_admin;

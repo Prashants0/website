@@ -29,12 +29,9 @@ export function LandingNav() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 no-underline"
+            className="flex items-center no-underline"
           >
-            <Logo size={38} className="shrink-0" />
-            <span className="font-display text-[22px] font-extrabold leading-none tracking-tight text-foreground">
-              SignSecure
-            </span>
+            <Logo size={46} className="h-11 w-auto shrink-0 sm:h-12" />
           </Link>
 
           {/* Desktop links */}
